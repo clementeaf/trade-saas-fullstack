@@ -2,6 +2,8 @@ import type { CellContext, ColumnDef } from '@tanstack/react-table';
 import { useState } from 'react';
 import Table from '../components/common/Table';
 import Button from '../components/common/Button';
+import Modal from '../components/common/Modal';
+import FormRegistrarOperacion from '../components/operaciones/FormRegistrarOperacion';
 import mockOperaciones from '../data/mockOperaciones.json';
 
 interface Operacion extends Record<string, unknown> {
@@ -14,9 +16,24 @@ interface Operacion extends Record<string, unknown> {
 
 function Operaciones(): React.JSX.Element {
   const [selectedRows, setSelectedRows] = useState<Operacion[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleRegistrarOperacion = (): void => {
-    console.log('Registrar operación');
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = (): void => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmitForm = (formData: {
+    tipo: string;
+    fecha: string;
+    monto: number;
+    estado: string;
+  }): void => {
+    console.log('Datos del formulario:', formData);
+    setIsModalOpen(false);
   };
 
   const handleEditar = (id: string): void => {
@@ -147,6 +164,17 @@ function Operaciones(): React.JSX.Element {
         enableRowSelection={true}
         onRowSelectionChange={handleRowSelectionChange}
       />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title="Registrar Operación"
+        size="md"
+      >
+        <FormRegistrarOperacion
+          onSubmit={handleSubmitForm}
+          onCancel={handleCloseModal}
+        />
+      </Modal>
     </div>
   );
 }

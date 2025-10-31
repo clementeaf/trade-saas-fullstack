@@ -4,8 +4,9 @@ interface FormRegistrarOperacionProps {
   onSubmit: (data: {
     tipo: string;
     fecha: string;
-    monto: number;
-    estado: string;
+    precioApertura: number;
+    tp: number;
+    sl: number;
   }) => void;
   onCancel: () => void;
 }
@@ -47,8 +48,9 @@ function FormRegistrarOperacion({
     onSubmit({
       tipo: formData.get('tipo') as string,
       fecha: currentDateTime,
-      monto: Number.parseFloat(formData.get('monto') as string),
-      estado: formData.get('estado') as string,
+      precioApertura: Number.parseFloat(formData.get('precioApertura') as string),
+      tp: Number.parseFloat(formData.get('tp') as string),
+      sl: Number.parseFloat(formData.get('sl') as string),
     });
   };
 
@@ -96,13 +98,13 @@ function FormRegistrarOperacion({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="monto" className="text-sm font-medium text-gray-700">
-          Monto
+        <label htmlFor="precioApertura" className="text-sm font-medium text-gray-700">
+          Precio Apertura
         </label>
         <input
           type="number"
-          id="monto"
-          name="monto"
+          id="precioApertura"
+          name="precioApertura"
           required
           min="0"
           step="0.01"
@@ -111,19 +113,33 @@ function FormRegistrarOperacion({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="estado" className="text-sm font-medium text-gray-700">
-          Estado
+        <label htmlFor="tp" className="text-sm font-medium text-gray-700">
+          TP
         </label>
-        <select
-          id="estado"
-          name="estado"
+        <input
+          type="number"
+          id="tp"
+          name="tp"
           required
+          min="0"
+          step="0.01"
           className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Seleccione un estado</option>
-          <option value="Completada">Completada</option>
-          <option value="Pendiente">Pendiente</option>
-        </select>
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="sl" className="text-sm font-medium text-gray-700">
+          SL
+        </label>
+        <input
+          type="number"
+          id="sl"
+          name="sl"
+          required
+          min="0"
+          step="0.01"
+          className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
 
       <div className="flex gap-3 justify-end mt-4">

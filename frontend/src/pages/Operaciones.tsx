@@ -29,8 +29,9 @@ function Operaciones(): React.JSX.Element {
   const handleSubmitForm = (formData: {
     tipo: string;
     fecha: string;
-    monto: number;
-    estado: string;
+    precioApertura: number;
+    tp: number;
+    sl: number;
   }): void => {
     console.log('Datos del formulario:', formData);
     setIsModalOpen(false);

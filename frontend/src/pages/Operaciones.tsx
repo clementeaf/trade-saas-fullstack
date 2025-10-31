@@ -15,6 +15,18 @@ function Operaciones(): React.JSX.Element {
     console.log('Registrar operación');
   };
 
+  const handleEditar = (id: string): void => {
+    console.log('Editar operación:', id);
+  };
+
+  const handleBorrar = (id: string): void => {
+    console.log('Borrar operación:', id);
+  };
+
+  const handleVer = (id: string): void => {
+    console.log('Ver operación:', id);
+  };
+
   const columns: ColumnDef<Operacion>[] = [
     {
       accessorKey: 'id',
@@ -38,6 +50,37 @@ function Operaciones(): React.JSX.Element {
     {
       accessorKey: 'estado',
       header: 'Estado',
+    },
+    {
+      id: 'acciones',
+      header: 'Acciones',
+      cell: ({ row }: CellContext<Operacion, unknown>): React.JSX.Element => {
+        return (
+          <div className="flex gap-2">
+            <Button
+              onClick={() => handleVer(row.original.id)}
+              variant="secondary"
+              className="text-xs px-2 py-1"
+            >
+              Ver
+            </Button>
+            <Button
+              onClick={() => handleEditar(row.original.id)}
+              variant="primary"
+              className="text-xs px-2 py-1"
+            >
+              Editar
+            </Button>
+            <Button
+              onClick={() => handleBorrar(row.original.id)}
+              variant="danger"
+              className="text-xs px-2 py-1"
+            >
+              Borrar
+            </Button>
+          </div>
+        );
+      },
     },
   ];
 

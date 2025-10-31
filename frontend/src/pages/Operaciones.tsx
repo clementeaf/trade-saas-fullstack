@@ -1,4 +1,5 @@
 import type { CellContext, ColumnDef } from '@tanstack/react-table';
+import { useState } from 'react';
 import Table from '../components/common/Table';
 import Button from '../components/common/Button';
 
@@ -11,6 +12,8 @@ interface Operacion extends Record<string, unknown> {
 }
 
 function Operaciones(): React.JSX.Element {
+  const [selectedRows, setSelectedRows] = useState<Operacion[]>([]);
+
   const handleRegistrarOperacion = (): void => {
     console.log('Registrar operación');
   };
@@ -27,7 +30,37 @@ function Operaciones(): React.JSX.Element {
     console.log('Ver operación:', id);
   };
 
+  const handleRowSelectionChange = (selectedRowsData: Operacion[]): void => {
+    setSelectedRows(selectedRowsData);
+    console.log('Filas seleccionadas:', selectedRowsData);
+  };
+
+  const handleEliminarSeleccionadas = (): void => {
+    console.log('Eliminar operaciones seleccionadas:', selectedRows);
+  };
+
   const columns: ColumnDef<Operacion>[] = [
+    {
+      id: 'select',
+      header: ({ table }) => (
+        <input
+          type="checkbox"
+          checked={table.getIsAllRowsSelected()}
+          onChange={(e) => table.toggleAllRowsSelected(e.target.checked)}
+          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+        />
+      ),
+      cell: ({ row }) => (
+        <input
+          type="checkbox"
+          checked={row.getIsSelected()}
+          onChange={(e) => row.toggleSelected(e.target.checked)}
+          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
     {
       accessorKey: 'id',
       header: 'ID',
@@ -108,15 +141,33 @@ function Operaciones(): React.JSX.Element {
     },
   ];
 
+  const selectedCount = selectedRows.length;
+  const hasSelection = selectedCount > 0;
+
   return (
     <div className="w-full h-full flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Operaciones</h1>
-        <Button onClick={handleRegistrarOperacion} variant="primary">
-          Registrar operacion
-        </Button>
+        <div className="flex gap-2 items-center">
+          {hasSelection && (
+            <Button
+              onClick={handleEliminarSeleccionadas}
+              variant="danger"
+            >
+              Eliminar ({selectedCount} {selectedCount === 1 ? 'operación' : 'operaciones'} seleccionada{selectedCount === 1 ? '' : 's'})
+            </Button>
+          )}
+          <Button onClick={handleRegistrarOperacion} variant="primary">
+            Registrar operacion
+          </Button>
+        </div>
       </div>
-      <Table data={data} columns={columns} />
+      <Table
+        data={data}
+        columns={columns}
+        enableRowSelection={true}
+        onRowSelectionChange={handleRowSelectionChange}
+      />
     </div>
   );
 }

@@ -1,0 +1,59 @@
+[
+  {
+    "id": "1",
+    "tipo": "Compra",
+    "fecha": "2024-01-15",
+    "monto": 1000,
+    "estado": "Completada"
+  },
+  {
+    "id": "2",
+    "tipo": "Venta",
+    "fecha": "2024-01-16",
+    "monto": 2500,
+    "estado": "Pendiente"
+  },
+  {
+    "id": "3",
+    "tipo": "Compra",
+    "fecha": "2024-01-17",
+    "monto": 500,
+    "estado": "Completada"
+  },
+  {
+    "id": "4",
+    "tipo": "Venta",
+    "fecha": "2024-01-18",
+    "monto": 3200,
+    "estado": "Completada"
+  },
+  {
+    "id": "5",
+    "tipo": "Compra",
+    "fecha": "2024-01-19",
+    "monto": 1500,
+    "estado": "Pendiente"
+  },
+  {
+    "id": "6",
+    "tipo": "Venta",
+    "fecha": "2024-01-20",
+    "monto": 4200,
+    "estado": "Completada"
+  },
+  {
+    "id": "7",
+    "tipo": "Compra",
+    "fecha": "2024-01-21",
+    "monto": 800,
+    "estado": "Completada"
+  },
+  {
+    "id": "8",
+    "tipo": "Venta",
+    "fecha": "2024-01-22",
+    "monto": 2800,
+    "estado": "Pendiente"
+  }
+]
+

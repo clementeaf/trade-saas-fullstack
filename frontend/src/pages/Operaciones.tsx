@@ -2,6 +2,7 @@ import type { CellContext, ColumnDef } from '@tanstack/react-table';
 import { useState } from 'react';
 import Table from '../components/common/Table';
 import Button from '../components/common/Button';
+import mockOperaciones from '../data/mockOperaciones.json';
 
 interface Operacion extends Record<string, unknown> {
   id: string;
@@ -117,29 +118,7 @@ function Operaciones(): React.JSX.Element {
     },
   ];
 
-  const data: Operacion[] = [
-    {
-      id: '1',
-      tipo: 'Compra',
-      fecha: '2024-01-15',
-      monto: 1000,
-      estado: 'Completada',
-    },
-    {
-      id: '2',
-      tipo: 'Venta',
-      fecha: '2024-01-16',
-      monto: 2500,
-      estado: 'Pendiente',
-    },
-    {
-      id: '3',
-      tipo: 'Compra',
-      fecha: '2024-01-17',
-      monto: 500,
-      estado: 'Completada',
-    },
-  ];
+  const data: Operacion[] = mockOperaciones as Operacion[];
 
   const selectedCount = selectedRows.length;
   const hasSelection = selectedCount > 0;

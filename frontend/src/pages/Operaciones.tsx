@@ -1,6 +1,6 @@
-
 import type { CellContext, ColumnDef } from '@tanstack/react-table';
 import Table from '../components/common/Table';
+import Button from '../components/common/Button';
 
 interface Operacion extends Record<string, unknown> {
   id: string;
@@ -11,6 +11,10 @@ interface Operacion extends Record<string, unknown> {
 }
 
 function Operaciones(): React.JSX.Element {
+  const handleRegistrarOperacion = (): void => {
+    console.log('Registrar operación');
+  };
+
   const columns: ColumnDef<Operacion>[] = [
     {
       accessorKey: 'id',
@@ -63,7 +67,12 @@ function Operaciones(): React.JSX.Element {
 
   return (
     <div className="w-full h-full flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Operaciones</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Operaciones</h1>
+        <Button onClick={handleRegistrarOperacion} variant="primary">
+          Registrar operacion
+        </Button>
+      </div>
       <Table data={data} columns={columns} />
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CustomSelector from '../common/CustomSelector';
 
 interface FormRegistrarOperacionProps {
   onSubmit: (data: {
@@ -16,6 +17,12 @@ function FormRegistrarOperacion({
   onCancel,
 }: FormRegistrarOperacionProps): React.JSX.Element {
   const [currentDateTime, setCurrentDateTime] = useState<string>('');
+  const [tipo, setTipo] = useState<string>('');
+
+  const tipoOptions = [
+    { value: 'Compra', label: 'Compra' },
+    { value: 'Venta', label: 'Venta' },
+  ];
 
   const getLocalDateTimeString = (): string => {
     const now = new Date();
@@ -46,7 +53,7 @@ function FormRegistrarOperacion({
     const formData = new FormData(e.currentTarget);
     
     onSubmit({
-      tipo: formData.get('tipo') as string,
+      tipo: tipo,
       fecha: currentDateTime,
       precioApertura: Number.parseFloat(formData.get('precioApertura') as string),
       tp: Number.parseFloat(formData.get('tp') as string),
@@ -71,16 +78,14 @@ function FormRegistrarOperacion({
         <label htmlFor="tipo" className="text-sm font-medium text-gray-700">
           Tipo
         </label>
-        <select
-          id="tipo"
+        <CustomSelector
           name="tipo"
           required
-          className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Seleccione un tipo</option>
-          <option value="Compra">Compra</option>
-          <option value="Venta">Venta</option>
-        </select>
+          value={tipo}
+          onChange={setTipo}
+          options={tipoOptions}
+          placeholder="Seleccione un tipo"
+        />
       </div>
 
       <div className="flex flex-col gap-2">

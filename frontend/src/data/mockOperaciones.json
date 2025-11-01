@@ -2,58 +2,65 @@
   {
     "id": "1",
     "tipo": "Compra",
-    "fecha": "2024-01-15",
-    "monto": 1000,
-    "estado": "Completada"
+    "fecha": "2024-01-15T10:30",
+    "precioApertura": 1000.50,
+    "tp": 1050.00,
+    "sl": 950.00
   },
   {
     "id": "2",
     "tipo": "Venta",
-    "fecha": "2024-01-16",
-    "monto": 2500,
-    "estado": "Pendiente"
+    "fecha": "2024-01-16T14:20",
+    "precioApertura": 2500.75,
+    "tp": 2450.00,
+    "sl": 2550.00
   },
   {
     "id": "3",
     "tipo": "Compra",
-    "fecha": "2024-01-17",
-    "monto": 500,
-    "estado": "Completada"
+    "fecha": "2024-01-17T09:15",
+    "precioApertura": 500.25,
+    "tp": 550.00,
+    "sl": 450.00
   },
   {
     "id": "4",
     "tipo": "Venta",
-    "fecha": "2024-01-18",
-    "monto": 3200,
-    "estado": "Completada"
+    "fecha": "2024-01-18T16:45",
+    "precioApertura": 3200.00,
+    "tp": 3150.00,
+    "sl": 3250.00
   },
   {
     "id": "5",
     "tipo": "Compra",
-    "fecha": "2024-01-19",
-    "monto": 1500,
-    "estado": "Pendiente"
+    "fecha": "2024-01-19T11:00",
+    "precioApertura": 1500.80,
+    "tp": 1600.00,
+    "sl": 1400.00
   },
   {
     "id": "6",
     "tipo": "Venta",
-    "fecha": "2024-01-20",
-    "monto": 4200,
-    "estado": "Completada"
+    "fecha": "2024-01-20T13:30",
+    "precioApertura": 4200.50,
+    "tp": 4150.00,
+    "sl": 4250.00
   },
   {
     "id": "7",
     "tipo": "Compra",
-    "fecha": "2024-01-21",
-    "monto": 800,
-    "estado": "Completada"
+    "fecha": "2024-01-21T08:45",
+    "precioApertura": 800.00,
+    "tp": 850.00,
+    "sl": 750.00
   },
   {
     "id": "8",
     "tipo": "Venta",
-    "fecha": "2024-01-22",
-    "monto": 2800,
-    "estado": "Pendiente"
+    "fecha": "2024-01-22T15:20",
+    "precioApertura": 2800.25,
+    "tp": 2750.00,
+    "sl": 2850.00
   }
 ]
-

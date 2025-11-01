@@ -7,6 +7,7 @@ import {
   type RowSelectionState,
 } from '@tanstack/react-table';
 import { useState, useEffect, useRef } from 'react';
+import { hasSelectionChanged } from '../../utils/tableUtils';
 
 interface TableProps<TData> {
   data: TData[];
@@ -50,10 +51,8 @@ function Table<TData extends Record<string, unknown>>({
   useEffect(() => {
     if (onRowSelectionChangeRef.current && enableRowSelection) {
       const prevSelection = prevRowSelectionRef.current;
-      const prevSelectionKeys = Object.keys(prevSelection).filter((id) => prevSelection[id]).sort().join(',');
-      const currentSelectionKeys = Object.keys(rowSelection).filter((id) => rowSelection[id]).sort().join(',');
       
-      if (prevSelectionKeys !== currentSelectionKeys) {
+      if (hasSelectionChanged(prevSelection, rowSelection)) {
         const selectedIds = Object.keys(rowSelection).filter((id) => rowSelection[id]);
         const selectedRows = data.filter((row) => {
           const rowId = typeof row === 'object' && row !== null && 'id' in row
@@ -65,7 +64,7 @@ function Table<TData extends Record<string, unknown>>({
         prevRowSelectionRef.current = rowSelection;
       }
     }
-  }, [rowSelection, enableRowSelection]);
+  }, [rowSelection, enableRowSelection, data]);
 
   return (
     <div className="w-full overflow-x-auto">

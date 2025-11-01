@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import CustomSelector from '../common/CustomSelector';
+import { TIPO_OPERACION_OPTIONS } from '../../constants/operaciones';
+import { getLocalDateTimeString, formatDisplayDateTime } from '../../utils/dateUtils';
 
 interface FormRegistrarOperacionProps {
   onSubmit: (data: {
@@ -19,25 +21,9 @@ function FormRegistrarOperacion({
   const [currentDateTime, setCurrentDateTime] = useState<string>('');
   const [tipo, setTipo] = useState<string>('');
 
-  const tipoOptions = [
-    { value: 'Compra', label: 'Compra' },
-    { value: 'Venta', label: 'Venta' },
-  ];
-
-  const getLocalDateTimeString = (): string => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  };
-
   useEffect(() => {
     const updateDateTime = (): void => {
-      const localDateTime = getLocalDateTimeString();
-      setCurrentDateTime(localDateTime);
+      setCurrentDateTime(getLocalDateTimeString());
     };
 
     updateDateTime();
@@ -61,16 +47,6 @@ function FormRegistrarOperacion({
     });
   };
 
-  const formatDisplayDateTime = (dateTimeString: string): string => {
-    if (!dateTimeString) return '';
-    const [datePart, timePart] = dateTimeString.split('T');
-    if (!datePart || !timePart) return '';
-    
-    const [year, month, day] = datePart.split('-');
-    const [hours, minutes] = timePart.split(':');
-    
-    return `${day}/${month}/${year}, ${hours}:${minutes}`;
-  };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -83,7 +59,7 @@ function FormRegistrarOperacion({
           required
           value={tipo}
           onChange={setTipo}
-          options={tipoOptions}
+          options={TIPO_OPERACION_OPTIONS}
           placeholder="Seleccione un tipo"
         />
       </div>
